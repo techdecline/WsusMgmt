@@ -104,7 +104,7 @@
             # ProjectUri = ''
 
             # Eine URL zu einem Symbol, das das Modul darstellt.
-            # IconUri = ''
+            IconUri = 'https://github.com/techdecline/WsusMgmt'
 
             # 'ReleaseNotes' des Moduls
             # ReleaseNotes = ''
