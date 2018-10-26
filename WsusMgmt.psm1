@@ -24,13 +24,7 @@
         [Parameter(Mandatory,ParameterSetName="WithProxy")]
         [ValidatePattern("^.*:.*$")]
         [String]
-        $ProxyAddress,
-
-        # Configure desired Targeting Mode
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("Client","Server")]
-        [String]
-        $TargetingMode
+        $ProxyAddress
     )
 
     process {
@@ -132,7 +126,6 @@ function Sync-WsusDeclinedUpdates {
         }
     }
 }
-
 function Sync-WsusTargetGroup {
     param (
         [String]$OldWsusServerName
@@ -165,7 +158,9 @@ function Approve-WsusUpdateLicense {
     $approvalResult = $WsusUpdate.Update.AcceptLicenseAgreement()
 }
 
+. .\function-Set-WsusTargetingMode.ps1
+
 # Export only the functions using PowerShell standard verb-noun naming.
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
 # This improves performance of command discovery in PowerShell.
-Export-ModuleMember -Function Start-WsusInitialization,Sync-WsusApprovedUpdates,Sync-WsusCategories,Sync-WsusDeclinedUpdates,Sync-WsusTargetGroup
+Export-ModuleMember -Function Start-WsusInitialization,Sync-WsusApprovedUpdates,Sync-WsusCategories,Sync-WsusDeclinedUpdates,Sync-WsusTargetGroup,Sync-WsusClassifications, Set-WsusTargetingMode
