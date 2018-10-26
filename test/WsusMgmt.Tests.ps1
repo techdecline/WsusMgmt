@@ -26,7 +26,7 @@ Describe "$ModuleName Manifest Tests" {
         }
     }
 
-    $functionArr = ("Set-WsusTargetingMode")
+    $functionArr = ("Set-WsusTargetingMode","Sync-WsusApprovedUpdates")
 
     foreach ($functionStr in $functionArr ) {
         Context "Test function $functionStr" {

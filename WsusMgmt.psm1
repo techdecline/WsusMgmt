@@ -1,25 +1,5 @@
 # Implement your module commands in this script.<#
 
-function Sync-WsusApprovedUpdates {
-    param (
-        [String]$OldWsusServerName
-    )
-
-    $newWsus = Get-WsusServer
-    $oldWsus = Get-WsusServer -Name $OldWsusServerName -PortNumber 8530
-    $updateArr = Get-WsusUpdate -UpdateServer $newWsus
-
-    foreach ($update in $updateArr) {
-        $oldUpdate = Get-WsusUpdate -UpdateServer $oldWsus -UpdateId $update.UpdateId
-        if ($oldUpdate.Approved -eq "Install") {
-            if (Get-WsusUpdateEulaApprovalRequirement -WsusUpdate $update) {
-                Approve-WsusUpdateLicense -WsusUpdate $update
-            }
-            Approve-WsusUpdate -Update $update -Action Install -TargetGroupName "Alle Computer"
-        }
-    }
-}
-
 function Sync-WsusCategories {
     param (
         [String]$OldWsusServerName
@@ -106,6 +86,7 @@ function Approve-WsusUpdateLicense {
 
 . .\function-Set-WsusTargetingMode.ps1
 . .\function-Start-WsusInitialization.ps1
+. .\function-Sync-WsusApprovedUpdates.ps1
 
 # Export only the functions using PowerShell standard verb-noun naming.
 # Be sure to list each exported functions in the FunctionsToExport field of the module manifest file.
