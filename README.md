@@ -3,7 +3,7 @@ PowerShell Module to automate and accelerate WSUS deployments and migrations.
 
 # How to install WSUS using WsusMgmt
 1. Install required Windows Features
-`Install-WindowsFeature UpdateServices-Services,UpdateServices-WID -IncludeManagementTools`
+`Install-WindowsFeature UpdateServices-Services,UpdateServices-WIDDB -IncludeManagementTools`
 2. Run Post-Installation
 `Start-Process -FilePath 'C:\Program Files\Update Services\Tools\wsusutil.exe' -ArgumentList 'postinstall CONTENT_DIR=C:\WSUS'`
 3. Browse to Module Directory
